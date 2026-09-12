@@ -1,5 +1,6 @@
 import 'package:google_mlkit_translation/google_mlkit_translation.dart';
 import 'package:random_quote_app/adout_page.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 //import 'package:random_quote_app/profile_page.dart';
 
 import 'Model/model_file.dart';
@@ -66,7 +67,11 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> getquote() async {
     final response = await http.get(Uri.parse("https://dummyjson.com/quotes"));
-
+    Future.delayed(Duration(seconds: 4), () {
+      setState(() {
+        isloading = false;
+      });
+    });
     if (response.statusCode == 200) {
       setState(() {
         welcome = welcomeFromJson(response.body);
@@ -179,10 +184,22 @@ class _HomePageState extends State<HomePage> {
       ),
 
       body: welcome == null
-          ? const Center(
-              child: Text(
-                "Press Generate to get quotes",
-                style: TextStyle(color: Colors.white),
+          ? Center(
+              child: AnimatedTextKit(
+                isRepeatingAnimation: false,
+                animatedTexts: [
+                  WavyAnimatedText(
+                    speed: Duration(milliseconds: 40),
+                    "Press Generate to get quotes",
+                    textStyle: TextStyle(
+                      fontFamily: "Poppins-Medium",
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFFE9F6FB),
+                      fontSize: 20,
+                      letterSpacing: 0.3,
+                    ),
+                  ),
+                ],
               ),
             )
           : Center(
@@ -240,69 +257,73 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-      floatingActionButton: Align(
-        alignment: AlignmentGeometry.bottomCenter,
-        child: SizedBox(
-          width: 100,
-          child: FloatingActionButton(
-            tooltip: "press to generate quotes",
-            hoverElevation: 10.0,
-            elevation: 10.0,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                width: 3.0,
-                style: BorderStyle.solid,
-                color: Color(0xFF80f5fc),
+      floatingActionButton: isloading
+          ? Align(
+              alignment: Alignment.bottomCenter,
+              child: CircularProgressIndicator(
+                color: Color(0xFFe5f7fc),
+                strokeWidth: 3.0,
               ),
-              borderRadius: BorderRadius.circular(10.0),
-              //borderRadius: BorderRadius.circular(10.0),
-            ),
-            hoverColor: Color(0xFFb1bcfa),
-            onPressed: () async {
-              setState(() {
-                isloading = true;
-              });
+            )
+          : Align(
+              alignment: AlignmentGeometry.bottomCenter,
+              child: SizedBox(
+                width: 100,
+                child: FloatingActionButton(
+                  tooltip: "press to generate quotes",
+                  hoverElevation: 10.0,
+                  elevation: 10.0,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      width: 3.0,
+                      style: BorderStyle.solid,
+                      color: Color(0xFF80f5fc),
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
+                    //borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  hoverColor: Color(0xFFb1bcfa),
+                  onPressed: () async {
+                    setState(() {
+                      isloading = true;
+                    });
 
-              try {
-                if (welcome == null) {
-                  await getquote();
-                } else {
-                  setState(() {
-                    currentIndex++;
+                    try {
+                      if (welcome == null) {
+                        await getquote();
+                      } else {
+                        setState(() {
+                          currentIndex++;
 
-                    if (currentIndex >= welcome!.quotes.length) {
-                      currentIndex = 0;
+                          if (currentIndex >= welcome!.quotes.length) {
+                            currentIndex = 0;
+                          }
+                        });
+                      }
+                    } catch (e) {
+                      print(e.toString());
+                    } finally {
+                      setState(() {
+                        isloading = false;
+                      });
                     }
-                  });
-                }
-              } catch (e) {
-                print(e.toString());
-              } finally {
-                setState(() {
-                  isloading = false;
-                });
-              }
-            },
-            backgroundColor: Color(0xFFe5f7fc),
-            foregroundColor: Color(0xFFa843fb),
-            //splashColor: Color(0xFF00D9FF),
-            child: isloading
-                ? CircularProgressIndicator(
-                    color: Color(0xFFe5f7fc),
-                    strokeWidth: 3.0,
-                  )
-                : Text(
+                  },
+                  backgroundColor: Color(0xFFe5f7fc),
+                  foregroundColor: Color(0xFFa843fb),
+                  //splashColor: Color(0xFF00D9FF),
+                  child: Text(
                     "Generate",
                     style: TextStyle(
                       fontFamily: "Inter-SemiBold",
+                      fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      fontSize: 15,
-                      letterSpacing: 0.7,
+                      color: Color(0xFF6C3BFF),
+                      letterSpacing: 0.5,
                     ),
                   ),
-          ),
-        ),
-      ),
+                ),
+              ),
+            ),
     );
   }
 }
