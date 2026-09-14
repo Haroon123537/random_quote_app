@@ -167,23 +167,18 @@ class _AdoutPageState extends State<AdoutPage> {
 
                                 SizedBox(width: 10),
 
-                                // UPDATE:
-                                // Expanded is now directly inside Row,
-                                // which is the correct place for Expanded.
-                                Transform.translate(
-                                  offset: Offset(0, 2),
-
-                                  // UPDATE:
-                                  // Removed Expanded from inside Transform.
-                                  // Transform can now safely contain the Text.
-                                  child: Text(
-                                    "Stay inspired. Learn new prespectives. Anytime, anywhere",
-                                    style: TextStyle(
-                                      fontFamily: 'Inter_24pt-SemiBold',
-                                      color: Color(0xFF01bbfe),
-                                      fontSize: 15,
+                                Expanded(
+                                  child: Transform.translate(
+                                    offset: Offset(0, 2),
+                                    child: Text(
+                                      "Stay inspired. Learn new prespectives. Anytime, anywhere",
+                                      style: TextStyle(
+                                        fontFamily: 'Inter_24pt-SemiBold',
+                                        color: Color(0xFF01bbfe),
+                                        fontSize: 15,
+                                      ),
+                                      softWrap: true,
                                     ),
-                                    softWrap: true,
                                   ),
                                 ),
                               ],
@@ -199,7 +194,7 @@ class _AdoutPageState extends State<AdoutPage> {
               //Second Container
               SizedBox(height: 10),
               Container(
-                height: 350,
+                //height: 350,
                 width: double.infinity,
                 margin: EdgeInsets.all(15.0),
                 padding: EdgeInsets.all(15.0),
@@ -219,37 +214,40 @@ class _AdoutPageState extends State<AdoutPage> {
                           height: 70,
                         ),
                         SizedBox(width: 5),
-                        Column(
-                          children: [
-                            Transform.translate(
-                              offset: Offset(-69, -1),
-                              child: Text(
-                                'How To Use',
-                                style: TextStyle(
-                                  fontSize: 23,
-                                  fontFamily: ' Roboto-Black',
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1.0,
-                                  color: Color(0xFF000833),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Transform.translate(
+                                offset: Offset(-69, -1),
+                                child: Text(
+                                  'How To Use',
+                                  style: TextStyle(
+                                    fontSize: 23,
+                                    fontFamily: ' Roboto-Black',
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1.0,
+                                    color: Color(0xFF000833),
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(height: 1),
-                            Text(
-                              "Follow these simple steps to get started",
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontFamily: 'Inter_24pt-SemiBold',
-                                color: Color(0xFF01bbfe),
+                              SizedBox(height: 1),
+                              Text(
+                                "Follow these simple steps to get started",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: 'Inter_24pt-SemiBold',
+                                  color: Color(0xFF01bbfe),
+                                ),
+                                softWrap: true,
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
                     SizedBox(height: 10),
                     Container(
-                      height: 100,
+                      //height: 100,
                       width: double.infinity,
                       padding: EdgeInsets.all(15.0),
                       decoration: BoxDecoration(
@@ -290,11 +288,12 @@ class _AdoutPageState extends State<AdoutPage> {
                             width: 75,
                           ),
                           SizedBox(width: 20),
-                          Column(
-                            children: [
-                              Transform.translate(
-                                offset: Offset(-140, 5),
-                                child: Text(
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
                                   'Get Quotes',
                                   style: TextStyle(
                                     fontSize: 23,
@@ -304,24 +303,26 @@ class _AdoutPageState extends State<AdoutPage> {
                                     color: Color(0xFF000833),
                                   ),
                                 ),
-                              ),
-                              SizedBox(height: 6),
-                              Text(
-                                "Tap the 'Generate' button in home page to fetch new quote",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontFamily: 'Inter_24pt-SemiBold',
-                                  color: Color(0xFF000833),
+
+                                SizedBox(height: 6),
+                                Text(
+                                  "Tap the 'Generate' button in home page to fetch new quote",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: 'Inter_24pt-SemiBold',
+                                    color: Color(0xFF000833),
+                                  ),
+                                  softWrap: true,
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
                     ),
                     SizedBox(height: 17),
                     Container(
-                      height: 100,
+                      //height: 100,
                       width: double.infinity,
                       padding: EdgeInsets.all(15.0),
                       decoration: BoxDecoration(
@@ -362,11 +363,12 @@ class _AdoutPageState extends State<AdoutPage> {
                             width: 75,
                           ),
                           SizedBox(width: 20),
-                          Column(
-                            children: [
-                              Transform.translate(
-                                offset: Offset(-220, 5),
-                                child: Text(
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
                                   'Translate',
                                   style: TextStyle(
                                     fontSize: 23,
@@ -376,17 +378,19 @@ class _AdoutPageState extends State<AdoutPage> {
                                     color: Color(0xFF000833),
                                   ),
                                 ),
-                              ),
-                              SizedBox(height: 6),
-                              Text(
-                                "Tap the 'Translate' iconbutton in home page to convert english quote into Urdu.",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontFamily: 'Inter_24pt-SemiBold',
-                                  color: Color(0xFF000833),
+
+                                SizedBox(height: 6),
+                                Text(
+                                  "Tap the 'Translate' iconbutton in home page to convert english quote into Urdu.",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: 'Inter_24pt-SemiBold',
+                                    color: Color(0xFF000833),
+                                  ),
+                                  softWrap: true,
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -396,7 +400,7 @@ class _AdoutPageState extends State<AdoutPage> {
               ),
               SizedBox(height: 10),
               Container(
-                height: 250,
+                //height: 250,
                 width: double.infinity,
                 margin: EdgeInsets.all(15.0),
                 padding: EdgeInsets.all(15.0),
@@ -416,11 +420,12 @@ class _AdoutPageState extends State<AdoutPage> {
                           width: 80,
                         ),
                         SizedBox(width: 5),
-                        Column(
-                          children: [
-                            Transform.translate(
-                              offset: Offset(-75, 7),
-                              child: Text(
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
                                 "We'd Love to hear from you",
                                 style: TextStyle(
                                   fontSize: 22,
@@ -430,18 +435,20 @@ class _AdoutPageState extends State<AdoutPage> {
                                   color: Color(0xFF000833),
                                 ),
                               ),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              'If you have any suggestions, feedback or ideas for improvement.\n'
-                              'Feel free to reach out to us.',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontFamily: 'Inter_24pt-SemiBold',
-                                color: Color(0xFF000833),
+
+                              SizedBox(height: 8),
+                              Text(
+                                'If you have any suggestions, feedback or ideas for improvement.\n'
+                                'Feel free to reach out to us.',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: 'Inter_24pt-SemiBold',
+                                  color: Color(0xFF000833),
+                                ),
+                                softWrap: true,
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
